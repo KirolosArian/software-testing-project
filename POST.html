@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>SAYCO | Tech Blog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body, html {
+            margin: 0; padding: 0;
+            background-color: #080a0c;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        #particles-js {
+            position: fixed; width: 100%; height: 100%;
+            top: 0; left: 0; z-index: 1;
+        }
+
+        .main-content {
+            position: relative; z-index: 2;
+            padding: 100px 20px 50px;
+        }
+
+        /* Navbar Style */
+        .navbar-custom {
+            background: rgba(17, 20, 24, 0.95);
+            border-bottom: 1px solid #2d353c;
+            backdrop-filter: blur(10px);
+        }
+        .navbar-brand { color: #00ffc3 !important; font-weight: 800; letter-spacing: 2px; }
+        .nav-link { color: #fff !important; margin: 0 10px; transition: 0.3s; }
+        .nav-link:hover { color: #00ffc3 !important; }
+
+        .blog-header { text-align: center; margin-bottom: 60px; }
+        .blog-header h1 { color: #00ffc3; font-weight: 800; font-size: 3rem; }
+        .blog-header p { color: #636e72; }
+
+        /* Post Card Style */
+        .post-card {
+            background: rgba(17, 20, 24, 0.8);
+            border: 1px solid #2d353c;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: 0.4s;
+            margin-bottom: 30px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .post-card:hover {
+            transform: translateY(-10px);
+            border-color: #00ffc3;
+            box-shadow: 0 10px 30px rgba(0, 255, 195, 0.1);
+        }
+
+        .post-img {
+            height: 200px;
+            background: #1a1f24;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00ffc3;
+            font-size: 50px;
+            border-bottom: 1px solid #2d353c;
+        }
+
+        .post-body { padding: 25px; flex-grow: 1; }
+        .post-tag { color: #00ffc3; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; display: block; }
+        .post-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 15px; }
+        .post-excerpt { color: #a4b0be; font-size: 0.95rem; line-height: 1.6; }
+
+        .post-footer {
+            padding: 20px 25px;
+            border-top: 1px solid #2d353c;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #636e72;
+        }
+
+        .read-more { color: #00ffc3; text-decoration: none; font-weight: 700; }
+        .read-more:hover { text-decoration: underline; }
+
+    </style>
+</head>
+<body>
+
+<div id="particles-js"></div>
+
+<nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">SAYCO</a>
+        <div class="navbar-nav ms-auto">
+            <a class="nav-link active" href="posts.html">المدونة</a>
+            <a class="nav-link" href="profile.html">البروفايل</a>
+            <a class="nav-link" href="#" onclick="logout()">خروج</a>
+        </div>
+    </div>
+</nav>
+
+<div class="main-content container">
+    <div class="blog-header">
+        <h1>Tech <span style="color: #fff;">Feed</span></h1>
+        <p>اكتشف أحدث المقالات التقنية، الشروحات، وأسرار البرمجة.</p>
+    </div>
+
+    <div class="row" id="postsContainer">
+        <div class="col-md-4">
+            <div class="post-card">
+                <div class="post-img">
+                    <i class="fa-solid fa-code"></i>
+                </div>
+                <div class="post-body">
+                    <span class="post-tag">برمجة</span>
+                    <h3 class="post-title">مستقبل Flutter في 2026</h3>
+                    <p class="post-excerpt">نظرة عميقة على التحديثات الجديدة في إطار العمل فلاتر وكيف سيغير شكل تطبيقات الموبايل...</p>
+                </div>
+                <div class="post-footer">
+                    <span><i class="fa-regular fa-clock"></i> 20 أبريل</span>
+                    <a href="#" class="read-more">اقرأ المزيد</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="post-card">
+                <div class="post-img">
+                    <i class="fa-solid fa-user-secret"></i>
+                </div>
+                <div class="post-body">
+                    <span class="post-tag">أمن سيبراني</span>
+                    <h3 class="post-title">أساسيات الـ Reverse Engineering</h3>
+                    <h3 class="post-title"></h3>
+                    <p class="post-excerpt">كيف تبدأ في تحليل ملفات الـ SO وفهم كيفية عمل التطبيقات من الداخل بطريقة احترافية...</p>
+                </div>
+                <div class="post-footer">
+                    <span><i class="fa-regular fa-clock"></i> 15 أبريل</span>
+                    <a href="#" class="read-more">اقرأ المزيد</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="post-card">
+                <div class="post-img">
+                    <i class="fa-solid fa-database"></i>
+                </div>
+                <div class="post-body">
+                    <span class="post-tag">تطوير</span>
+                    <h3 class="post-title">Firebase و Real-time Data</h3>
+                    <p class="post-excerpt">شرح مبسط لكيفية ربط تطبيقك بقاعدة بيانات فايربيز والحصول على تحديثات فورية للبيانات...</p>
+                </div>
+                <div class="post-footer">
+                    <span><i class="fa-regular fa-clock"></i> 10 أبريل</span>
+                    <a href="#" class="read-more">اقرأ المزيد</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+    /* أنيميشن كودك الأصلي */
+    particlesJS("particles-js", {
+        "particles": {
+            "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+            "color": { "value": "#00ffc3" },
+            "shape": { "type": "circle" },
+            "opacity": { "value": 0.4 },
+            "size": { "value": 3, "random": true },
+            "line_linked": { "enable": true, "distance": 150, "color": "#00ffc3", "opacity": 0.2 },
+            "move": { "enable": true, "speed": 1.5 }
+        }
+    });
+
+    function logout() {
+        window.location.href = "login.html";
+    }
+</script>
+</body>
+</html>
