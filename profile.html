@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>SAYCO | User Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body, html {
+            margin: 0; padding: 0; height: 100%;
+            background-color: #080a0c;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            overflow: hidden;
+        }
+
+        #particles-js {
+            position: absolute; width: 100%; height: 100%;
+            top: 0; left: 0; z-index: 1;
+        }
+
+        .main-container {
+            position: relative; z-index: 2;
+            height: 100vh; width: 100%;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .profile-card {
+            background: rgba(17, 20, 24, 0.9);
+            border: 1px solid #2d353c;
+            border-top: 4px solid #00ffc3;
+            border-radius: 15px;
+            padding: 40px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            text-align: center;
+        }
+
+        .user-avatar {
+            width: 110px; height: 110px;
+            background: #1a1f24;
+            border: 2px solid #00ffc3;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 20px;
+            color: #00ffc3; font-size: 40px;
+            overflow: hidden; /* عشان الصورة متطلعش برا الدايرة */
+        }
+
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* بيخلي الصورة تملى الدايرة بشكل مظبوط */
+        }
+
+        h2 { color: #00ffc3; margin-bottom: 30px; font-weight: 700; }
+
+        .info-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 20px; text-align: right; margin-bottom: 30px;
+        }
+
+        .info-item {
+            background: #1a1f24;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #2d353c;
+            transition: 0.3s;
+        }
+
+        .info-item:hover {
+            border-color: #00ffc3;
+            transform: translateY(-5px);
+        }
+
+        .info-label { color: #00ffc3; font-size: 0.8em; display: block; margin-bottom: 5px; }
+        .info-value { color: #fff; font-weight: 600; font-size: 1em; }
+
+        .actions { display: flex; gap: 10px; }
+
+        .btn-custom {
+            flex: 1; padding: 12px; font-weight: 700;
+            border-radius: 5px; transition: 0.4s; border: none;
+        }
+
+        .btn-edit { background: #00ffc3; color: #080a0c; }
+        .btn-edit:hover { background: #00ce9d; box-shadow: 0 0 15px rgba(0, 255, 195, 0.4); }
+
+        .btn-logout { background: #ff4d4d; color: #fff; }
+        .btn-logout:hover { background: #d63031; box-shadow: 0 0 15px rgba(255, 77, 77, 0.4); }
+
+    </style>
+</head>
+<body>
+
+<div id="particles-js"></div>
+
+<div class="main-container">
+    <div class="profile-card">
+        <div class="user-avatar" id="avatarContainer">
+            <i class="fa-solid fa-user-shield" id="defaultIcon"></i>
+        </div>
+        
+        <h2 id="welcomeName">مرحباً بك</h2>
+        
+        <div class="info-grid">
+            <div class="info-item">
+                <span class="info-label">الاسم بالكامل</span>
+                <span class="info-value" id="dispName">---</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">البريد الإلكتروني</span>
+                <span class="info-value" id="dispEmail">---</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">العنوان الحالي</span>
+                <span class="info-value" id="dispAddress">---</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">الدولة</span>
+                <span class="info-value" id="dispCountry">---</span>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn-custom btn-edit" onclick="location.href='edit-profile.html'"><i class="fa-solid fa-pen-to-square"></i> تعديل البيانات</button>
+            <button class="btn-custom btn-logout" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> خروج</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+    /* أنيميشن كودك الأصلي كما هو */
+    particlesJS("particles-js", {
+        "particles": {
+            "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+            "color": { "value": "#00ffc3" },
+            "shape": { "type": "circle" },
+            "opacity": { "value": 0.5, "random": false },
+            "size": { "value": 3, "random": true },
+            "line_linked": { "enable": true, "distance": 150, "color": "#00ffc3", "opacity": 0.4, "width": 1 },
+            "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
+        },
+        "interactivity": {
+            "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" } },
+            "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 1 } } }
+        },
+        "retina_detect": true
+    });
+
+    window.onload = function() {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (!user) {
+            window.location.href = "login.html";
+        } else {
+            // تحديث الاسم والبيانات
+            document.getElementById('welcomeName').innerText = "مرحباً، " + user.name.split(' ')[0];
+            document.getElementById('dispName').innerText = user.name;
+            document.getElementById('dispEmail').innerText = user.email;
+            document.getElementById('dispAddress').innerText = user.address || "غير محدد";
+            document.getElementById('dispCountry').innerText = user.country || "غير محدد";
+
+            // منطق عرض الصورة
+            const avatarContainer = document.getElementById('avatarContainer');
+            if (user.profilePic) { // بنفترض إنك خزنت الصورة في localStorage باسم profilePic
+                document.getElementById('defaultIcon').style.display = 'none';
+                const img = document.createElement('img');
+                img.src = user.profilePic;
+                avatarContainer.appendChild(img);
+            }
+        }
+    };
+
+    function logout() {
+        window.location.href = "login.html";
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>SAYCO | Edit Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body, html {
+            margin: 0; padding: 0; height: 100%;
+            background-color: #080a0c;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            overflow: hidden;
+        }
+
+        #particles-js {
+            position: absolute; width: 100%; height: 100%;
+            top: 0; left: 0; z-index: 1;
+        }
+
+        .main-container {
+            position: relative; z-index: 2;
+            height: 100vh; display: flex;
+            align-items: center; justify-content: center;
+        }
+
+        .auth-card {
+            background: #111418;
+            border-top: 4px solid #00ffc3;
+            border-radius: 10px;
+            padding: 30px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+
+        h2 { color: #00ffc3; font-weight: 700; text-align: center; margin-bottom: 20px; letter-spacing: 1px; }
+
+        /* ستايل رفع الصورة */
+        .avatar-upload {
+            position: relative;
+            max-width: 100px;
+            margin: 0 auto 20px;
+        }
+        .avatar-edit {
+            position: absolute;
+            right: -5px;
+            z-index: 1;
+            top: -5px;
+        }
+        .avatar-edit input { display: none; }
+        .avatar-edit label {
+            display: flex; align-items: center; justify-content: center;
+            width: 30px; height: 30px; border-radius: 50%;
+            background: #00ffc3; color: #080a0c;
+            cursor: pointer; font-size: 14px; transition: 0.3s;
+        }
+        .avatar-preview {
+            width: 100px; height: 100px;
+            position: relative; border-radius: 50%;
+            border: 2px solid #2d353c;
+            overflow: hidden; background: #1a1f24;
+        }
+        .avatar-preview img { width: 100%; height: 100%; object-fit: cover; }
+        .avatar-preview i { 
+            font-size: 40px; color: #2d353c; 
+            display: flex; align-items: center; justify-content: center; height: 100%;
+        }
+
+        .form-control {
+            background: #1a1f24;
+            border: 1px solid #2d353c;
+            color: #fff !important;
+            padding: 12px;
+            margin-bottom: 10px;
+            transition: 0.3s;
+        }
+
+        .form-control:enabled:hover {
+            border-color: #00ffc3;
+            box-shadow: 0 0 15px rgba(0, 255, 195, 0.3);
+            background: #21282e;
+        }
+
+        .form-control:disabled {
+            background: #0c0e10;
+            opacity: 0.4;
+        }
+
+        .btn-save {
+            background: #00ffc3; color: #080a0c;
+            font-weight: 800; border: none; padding: 12px;
+            margin-top: 10px; transition: 0.4s;
+        }
+
+        .btn-save:enabled:hover {
+            background: #00ce9d; transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 195, 0.4);
+        }
+
+        .error-hint { color: #ff4d4d; font-size: 0.8em; display: none; margin-bottom: 10px; }
+        ::placeholder { color: #636e72 !important; }
+        .back-link { text-align: center; margin-top: 15px; }
+        .back-link a { color: #636e72; text-decoration: none; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+
+<div id="particles-js"></div>
+
+<div class="main-container">
+    <div class="auth-card">
+        <h2>تعديل البيانات</h2>
+        
+        <form id="editForm">
+            <div class="avatar-upload">
+                <div class="avatar-edit">
+                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                    <label for="imageUpload"><i class="fa-solid fa-camera"></i></label>
+                </div>
+                <div class="avatar-preview" id="imagePreview">
+                    <i class="fa-solid fa-user-shield" id="placeholderIcon"></i>
+                </div>
+            </div>
+
+            <input type="text" id="name" class="form-control" placeholder="الاسم الكامل الجديد" required>
+            <div id="nameError" class="error-hint">⚠️ يرجى إدخال اسمين (حروف فقط).</div>
+
+            <input type="text" id="address" class="form-control" placeholder="تعديل العنوان" required disabled>
+            <div id="addressError" class="error-hint">⚠️ العنوان لا يمكن أن يكون أرقاماً فقط.</div>
+
+            <input type="text" id="country" class="form-control" placeholder="تعديل الدولة" required disabled>
+            <div id="countryError" class="error-hint">⚠️ الدولة يجب أن تحتوي على حروف فقط.</div>
+
+            <button type="submit" id="submitBtn" class="btn btn-save w-100" disabled>حفظ التغييرات</button>
+            
+            <div class="back-link">
+                <a href="profile.html">العودة للبروفايل</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+    particlesJS("particles-js", {
+        "particles": {
+            "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+            "color": { "value": "#00ffc3" },
+            "shape": { "type": "circle" },
+            "opacity": { "value": 0.5 },
+            "size": { "value": 3, "random": true },
+            "line_linked": { "enable": true, "distance": 150, "color": "#00ffc3", "opacity": 0.4 },
+            "move": { "enable": true, "speed": 2 }
+        }
+    });
+
+    const inputs = [
+        document.getElementById('name'),
+        document.getElementById('address'),
+        document.getElementById('country')
+    ];
+    const submitBtn = document.getElementById('submitBtn');
+    const imageUpload = document.getElementById('imageUpload');
+    const imagePreview = document.getElementById('imagePreview');
+    let profilePicBase64 = "";
+
+    // تحميل البيانات
+    window.onload = () => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user) {
+            inputs[0].value = user.name || "";
+            inputs[1].value = user.address || "";
+            inputs[2].value = user.country || "";
+            
+            if(user.profilePic) {
+                profilePicBase64 = user.profilePic;
+                renderImage(user.profilePic);
+            }
+
+            inputs[1].disabled = false;
+            inputs[2].disabled = false;
+            submitBtn.disabled = false;
+        }
+    };
+
+    // معالجة رفع الصورة
+    imageUpload.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                profilePicBase64 = e.target.result;
+                renderImage(profilePicBase64);
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+
+    function renderImage(src) {
+        imagePreview.innerHTML = `<img src="${src}" />`;
+    }
+
+    // تتابع الخانات
+    inputs.forEach((input, index) => {
+        input.addEventListener('input', () => {
+            const errorId = input.id + "Error";
+            if(document.getElementById(errorId)) document.getElementById(errorId).style.display = 'none';
+
+            if (input.value.trim().length > 0) {
+                if (index + 1 < inputs.length) inputs[index + 1].disabled = false;
+                else submitBtn.disabled = false;
+            } else {
+                for (let i = index + 1; i < inputs.length; i++) {
+                    inputs[i].disabled = true;
+                }
+                submitBtn.disabled = true;
+            }
+        });
+    });
+
+    document.getElementById('editForm').onsubmit = function(e) {
+        e.preventDefault();
+        const nameVal = inputs[0].value.trim();
+        const addrVal = inputs[1].value.trim();
+        const countryVal = inputs[2].value.trim();
+
+        const textOnlyRegex = /^[a-zA-Z\u0600-\u06FF\s]+$/;
+        const nameValid = nameVal.split(' ').filter(n => n.length > 0).length >= 2 && textOnlyRegex.test(nameVal);
+        const addrValid = isNaN(addrVal); 
+        const countryValid = textOnlyRegex.test(countryVal);
+
+        document.getElementById('nameError').style.display = nameValid ? 'none' : 'block';
+        document.getElementById('addressError').style.display = addrValid ? 'none' : 'block';
+        document.getElementById('countryError').style.display = countryValid ? 'none' : 'block';
+
+        if (nameValid && addrValid && countryValid) {
+            const user = JSON.parse(localStorage.getItem('user')) || {};
+            const updatedUser = { 
+                ...user, 
+                name: nameVal, 
+                address: addrVal, 
+                country: countryVal,
+                profilePic: profilePicBase64 // حفظ الصورة الجديدة
+            };
+            localStorage.setItem('user', JSON.stringify(updatedUser));
+            alert("تم التحديث بنجاح!");
+            window.location.href = "profile.html";
+        }
+    };
+</script>
+</body>
+</html>
